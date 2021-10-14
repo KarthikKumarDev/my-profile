@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "name": "TVS High Secondary School",
+      "city": "Madurai",
+      "state": "Tamil Nadu",
+      "geoCodes": {
+        "latitude": 9.901,
+        "longitude": 78.1012
+      }
+    }
+  ]
+}
