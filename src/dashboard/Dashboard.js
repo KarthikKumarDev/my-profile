@@ -1,5 +1,7 @@
+import schoolLogo from '../images/school-logo.png'
 import { useEffect } from "react";
 import * as rawData from "../data/Data.json";
+
 const Data = rawData.default;
 
 function Dashboard(props) {
@@ -9,7 +11,15 @@ function Dashboard(props) {
 
   useEffect(() => {
     if (props.isMapLoaded) {
-      props.renderGraphicsLayer(Data.data[0].geoCodes);
+     let markerData ={
+        geoCodes: Data.data[0].geoCodes,
+        picture: {
+          src: schoolLogo,
+          height: "50px",
+          width: "175px"
+        }
+      }
+      props.renderGraphicsLayer( markerData);
     }
   }, [props.isMapLoaded]);
 

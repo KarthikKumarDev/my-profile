@@ -36,22 +36,19 @@ function ESRIMap(props) {
     }
   }, []);
 
-  const addGraphicsMarkerLayer = (geoCodes) =>{
+  const addGraphicsMarkerLayer = (markerData) =>{
     const point = {
       type: "point", // autocasts as new Point()
-      longitude: geoCodes.longitude,
-      latitude: geoCodes.latitude
+      longitude: markerData.geoCodes.longitude,
+      latitude: markerData.geoCodes.latitude
     };
 
     // Create a symbol for drawing the point
     const markerSymbol = {
-      type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-      color: [226, 119, 40],
-      outline: {
-        // autocasts as new SimpleLineSymbol()
-        color: [255, 255, 255],
-        width: 2
-      }
+      type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
+      url: markerData.picture.src,
+      width: markerData.picture.width,
+      height: markerData.picture.height
     };
 
     // Create a graphic and add the geometry and symbol to it
