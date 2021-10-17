@@ -37,26 +37,30 @@ function ESRIMap(props) {
   }, []);
 
   const addGraphicsMarkerLayer = (markerData) =>{
-    const point = {
-      type: "point", // autocasts as new Point()
-      longitude: markerData.geoCodes.longitude,
-      latitude: markerData.geoCodes.latitude
-    };
-
-    // Create a symbol for drawing the point
-    const markerSymbol = {
-      type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
-      url: markerData.picture.src,
-      width: markerData.picture.width,
-      height: markerData.picture.height
-    };
-
-    // Create a graphic and add the geometry and symbol to it
-    const pointGraphic = new Graphic({
-      geometry: point,
-      symbol: markerSymbol
-    });
-    mapViewObjRef.current.graphics.addMany([pointGraphic]);
+    let customGraphicsList = []
+    markerData.forEach(location=>{
+      const point = {
+        type: "point", // autocasts as new Point()
+        longitude: location.geoCodes.longitude,
+        latitude: location.geoCodes.latitude
+      };
+  
+      // Create a symbol for drawing the point
+      const markerSymbol = {
+        type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
+        url: location.picture.src,
+        width: location.picture.width,
+        height: location.picture.height
+      };
+  
+      // Create a graphic and add the geometry and symbol to it
+      const pointGraphic = new Graphic({
+        geometry: point,
+        symbol: markerSymbol
+      });
+      customGraphicsList.push(pointGraphic)
+    })
+    mapViewObjRef.current.graphics.addMany(customGraphicsList);
   }
 
   return <div className="mapDiv" ref={mapDiv}><Dashboard isMapLoaded={isMapLoaded} renderGraphicsLayer = {addGraphicsMarkerLayer} /></div>;
