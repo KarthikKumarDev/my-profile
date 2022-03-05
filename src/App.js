@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 
-import './App.css';
-import ESRIMap from './dashboard/ESRIMap';
-import MapSelector from './selector/MapSelector';
+import "./App.css";
+import ESRIMap from "./dashboard/ESRIMap";
+import MapSelector from "./selector/MapSelector";
+
+export const MapTypes = ["satellite", "streets-vector", "gray-vector"];
 
 function App() {
-  const [isCollegeData, setCollegeMode] = useState(true);
+  const [mapType, setMapType] = useState(MapTypes[0]);
+
   return (
     <div className="App">
-      <MapSelector currentMode={isCollegeData} setMapMode={(value)=> setCollegeMode(value)} />
-      <ESRIMap mapSelection={isCollegeData}></ESRIMap>
+      <MapSelector
+        currentMode={mapType}
+        setMapMode={(value) => setMapType(value)}
+      />
+      <ESRIMap currentMode={mapType}></ESRIMap>
     </div>
   );
 }

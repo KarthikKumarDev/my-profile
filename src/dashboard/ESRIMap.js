@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import Graphic from "@arcgis/core/Graphic";
-
+import Basemap from "@arcgis/core/Basemap";
 import Point from "@arcgis/core/geometry/Point";
 import Polygon from "@arcgis/core/geometry/Polygon";
 import * as webMercatorUtils from "@arcgis/core/geometry/support/webMercatorUtils";
@@ -26,7 +26,7 @@ function ESRIMap(props) {
        */
 
       mapObjRef.current = new Map({
-        basemap: "hybrid",
+        basemap: props.currentMode,
         layers: [],
       });
 
@@ -41,6 +41,17 @@ function ESRIMap(props) {
     }, mapViewObjRef.current.spatialReferenceWarningDelay);
     }
   }, []);
+
+  useEffect(() => {
+    if (mapDiv.current && mapObjRef.current) {
+
+       mapObjRef.current.basemap = Basemap.fromId(props.currentMode);
+
+      setTimeout(function () {
+        setIsMapLoaded(true);
+    }, mapViewObjRef.current.spatialReferenceWarningDelay);
+    }
+  }, [props.currentMode]);
 
   const recenterMap = (locations, zoomLevel) => {
     if (mapViewObjRef.current && locations && locations.length > 0) {
