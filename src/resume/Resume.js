@@ -5,6 +5,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 import resumePDF from "./KarthikKumarJ.pdf";
 import "./Resume.scss";
@@ -32,14 +33,14 @@ const Resume = (props) => {
     link.remove();
   };
 
-  const handleOpenNewTab = (event) =>{
+  const handleOpenNewTab = (event) => {
     var link = document.createElement("a");
     link.href = resumePDF;
     link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     link.remove();
-  }
+  };
 
   return (
     <div className="resume">
@@ -52,6 +53,14 @@ const Resume = (props) => {
                 onClick={handleResumeDownload}
               />
               <OpenInNewIcon color="secondary" onClick={handleOpenNewTab} />
+              <GitHubIcon
+                color="primary"
+                onClick={(event) =>
+                  window
+                    .open("https://github.com/KarthikKumarDev", "_blank")
+                    .focus()
+                }
+              />
               <CancelIcon color="error" onClick={props.handleClose} />
             </div>
           </div>
