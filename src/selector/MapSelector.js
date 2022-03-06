@@ -1,31 +1,45 @@
 //@ts-check
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+} from "@mui/material";
 import React, { useState } from "react";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+
 import { MapTypes } from "../App";
 import "./MapSelector.scss";
 
 function MapSelector(props) {
 
   const handleChange = (event) => {
-    props.setMapMode(event.target.value)
+    props.setMapMode(event.target.value);
   };
+
   return (
     <div className="map-controls">
       <div className="radio-selector">
-        <input
-          type="radio"
-          name="rg1"
-          checked={props.currentMode}
-          onChange={() => props.setMapMode(true)}
-        />
-        Professional
-        <input
-          type="radio"
-          name="rg1"
-          checked={!props.currentMode}
-          onChange={() => props.setMapMode(false)}
-        />
-        Personal
+        <div>
+          <input
+            type="radio"
+            name="rg1"
+            checked={props.currentMode}
+            onChange={() => props.setMapMode(true)}
+          />
+          Work
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="rg1"
+            checked={!props.currentMode}
+            onChange={() => props.setMapMode(false)}
+          />
+          Education
+        </div>
+        <PictureAsPdfIcon color="primary" onClick={props.HandleOpenResume}/>
       </div>
       <div className="map-type">
         <FormControl fullWidth>

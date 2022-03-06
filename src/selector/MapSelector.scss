@@ -8,6 +8,10 @@
         background: whitesmoke;
         padding: 10px;
         border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 250px;
     
         input{
             margin-right: 10px;
