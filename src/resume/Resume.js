@@ -1,5 +1,5 @@
 //@ts-check
-import { Button, Dialog, DialogContent } from "@mui/material";
+import { Dialog, DialogContent } from "@mui/material";
 import { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -13,12 +13,8 @@ import "./Resume.scss";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const Resume = (props) => {
-  const [file, setFile] = useState("../data/KarthikKumarJ.pdf");
   const [numPages, setNumPages] = useState(null);
 
-  const onFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
 
   const onDocumentLoadSuccess = ({ numPages: nextNumPages }) => {
     setNumPages(nextNumPages);

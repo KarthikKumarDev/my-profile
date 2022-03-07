@@ -4,9 +4,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
 import { MapTypes } from "../App";
@@ -51,8 +50,8 @@ function MapSelector(props) {
             label="Map Type"
             onChange={handleChange}
           >
-            {MapTypes.map((type) => (
-              <MenuItem value={type}>{type}</MenuItem>
+            {MapTypes.map((type, index) => (
+              <MenuItem key={index} value={type}>{type}</MenuItem>
             ))}
           </Select>
         </FormControl>

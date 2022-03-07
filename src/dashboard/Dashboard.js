@@ -7,8 +7,10 @@ const Data = rawData.default;
 
 function Dashboard(props) {
 
+  const {isMapLoaded, renderGraphicsLayer, recenterMap} = props;
+
   useEffect(() => {
-    if (props.isMapLoaded) {
+    if (isMapLoaded) {
       let markerData = [
         {
           geoCodes: Data.data[0].geoCodes,
@@ -28,10 +30,10 @@ function Dashboard(props) {
         },
       ];
       const geoCodes = Data.data.map((dataItem) => dataItem.geoCodes);
-      props.renderGraphicsLayer(markerData);
-      props.recenterMap(geoCodes);
+      renderGraphicsLayer(markerData);
+      recenterMap(geoCodes);
     }
-  }, [props.isMapLoaded]);
+  }, [isMapLoaded]);
 
   return false;
 }

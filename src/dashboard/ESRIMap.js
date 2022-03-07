@@ -18,7 +18,7 @@ function ESRIMap(props) {
   let mapObjRef = useRef(null);
 
   let mapViewObjRef = useRef(null);
-
+  const {currentMode} = props;
   useEffect(() => {
     if (mapDiv.current) {
       /**
@@ -26,7 +26,7 @@ function ESRIMap(props) {
        */
 
       mapObjRef.current = new Map({
-        basemap: props.currentMode,
+        basemap: currentMode,
         layers: [],
       });
 
@@ -99,7 +99,7 @@ function ESRIMap(props) {
 
   const addGraphicsMarkerLayer = (markerData) => {
     let customGraphicsList = [];
-    let geoCodes = []
+    
     markerData.forEach((location) => {
       const point = {
         type: "point", // autocasts as new Point()
