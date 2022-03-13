@@ -36,6 +36,10 @@ function ESRIMap(props) {
         zoom: 3,
         map: mapObjRef.current,
       });
+
+      // Widget Positions
+      mapViewObjRef.current.ui.move("zoom", "bottom-right");
+
       setTimeout(function () {
         setIsMapLoaded(true);
     }, mapViewObjRef.current.spatialReferenceWarningDelay);
