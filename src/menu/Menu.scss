@@ -1,0 +1,16 @@
+.flip-menu{
+    position: absolute;
+    z-index: 1;
+    margin-left: 25px;
+    margin-top: 25px;
+    background: aliceblue;
+    border-radius: 50px;
+    padding: 5px;
+    transition: all .2s ease-in-out;
+    box-shadow: black 2px 3px 5px;
+}
+
+.flip-menu:hover{
+    background: gold;
+    transform: scale(1.1);
+}

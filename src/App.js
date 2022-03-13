@@ -5,6 +5,7 @@ import "./App.css";
 import ESRIMap from "./dashboard/ESRIMap";
 import Resume from "./resume/Resume";
 import MapSelector from "./selector/MapSelector";
+import Menu from "./menu/Menu";
 
 export const MapTypes = ["satellite", "streets-vector", "gray-vector"];
 
@@ -14,10 +15,11 @@ function App() {
 
   return (
     <div className="App">
+      <Menu />
       <MapSelector
         currentMode={mapType}
         setMapMode={(value) => setMapType(value)}
-        HandleOpenResume= {(event) => setResumeOpen(true)}
+        HandleOpenResume={(event) => setResumeOpen(true)}
       />
       <ESRIMap currentMode={mapType}></ESRIMap>
       <Resume
