@@ -11,17 +11,32 @@ function MenuItem(props) {
     currentMenuItem != null ? ProfileData[currentMenuItem] : false;
   return (
     <div className="menu-wrapper">
-      {ProfileData.map((item, index) => {
-        const indexToUpdate = currentMenuItem === index ? null : index;
-        return (
-          <div
-            className="menu-item"
-            onClick={(event) => setMenuItemIndex(indexToUpdate)}
-          > Icon {index + 1}</div>
-        );
-      })}
+      <div className="d-flex">
+        {ProfileData.map((item, index) => {
+          const indexToUpdate = currentMenuItem === index ? null : index;
+          return (
+            <div
+              className={`menu-item ${
+                index === currentMenuItem ? "selected-menu" : ""
+              }`}
+              onClick={(event) => setMenuItemIndex(indexToUpdate)}
+            >
+              <img src="./images/tech-icon.png" width="40px" />
+            </div>
+          );
+        })}
+      </div>
 
-      {rowToShow && <div className="menu-panel">{rowToShow.topic}</div>}
+      {rowToShow && (
+        <>
+          <div className="menu-panel">
+            <div className="title">{rowToShow.topic}</div>
+            {rowToShow.items.map((item) => (
+              <p>{item}</p>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

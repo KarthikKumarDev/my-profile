@@ -19,7 +19,6 @@
     }
     .menu-wrapper{
         display: flex;
-        margin-top: 20px;
 
         .menu-item{
             height: 60px;
@@ -27,15 +26,44 @@
             background-color: aliceblue;
             border-radius: 10px;
             border: darkblue 4px solid;
+            height: 55px;
+            margin-top: 20px;
+
+            img{
+                padding: 5px 0px;
+            }
+        }
+
+        .selected-menu{
+            background-color: darkorange;
+            border: white 4px solid;
         }
     
         .menu-panel{
             background-color:azure;
+            margin-top: 20px;
             margin-left: 20px;
             height: 200px;
             width: 300px;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: black 0px 6px 12px;
+            animation: 1s ease-out 0s 1 slideInFromLeft;
+            
+            .title{
+                background: darkorange;
+                padding: 5px;
+                border-radius: 10px 10px 0px 0px;
+            }
         }
     }    
 }
+
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-10%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+}
+

@@ -1,8 +1,12 @@
 {
     "profile":[
         {
-            "topic": "Technologies",
-            "items":["Web", "Server Side", "DevOps"]
+            "topic": "Technolgies & Languages",
+            "items":["ReactJS", "Angular", "Typescript"]
+        },
+        {
+            "topic": "Technolgies & Languages",
+            "items":["Dotnet", "NodeJs", "Entity Framework"]
         }
     ]
 }
