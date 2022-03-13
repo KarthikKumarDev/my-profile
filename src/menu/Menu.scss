@@ -1,16 +1,41 @@
-.flip-menu{
+.profile-menu{
     position: absolute;
     z-index: 1;
     margin-left: 25px;
     margin-top: 25px;
-    background: aliceblue;
-    border-radius: 50px;
-    padding: 5px;
-    transition: all .2s ease-in-out;
-    box-shadow: black 2px 3px 5px;
-}
 
-.flip-menu:hover{
-    background: gold;
-    transform: scale(1.1);
+    .flip-menu{
+        background: aliceblue;
+        border-radius: 50px;
+        padding: 5px;
+        transition: all .2s ease-in-out;
+        box-shadow: black 2px 3px 5px;
+        width: 48px;
+    }
+    
+    .flip-menu:hover{
+        background: gold;
+        transform: scale(1.1);
+    }
+    .menu-wrapper{
+        display: flex;
+        margin-top: 20px;
+
+        .menu-item{
+            height: 60px;
+            width: 60px;
+            background-color: aliceblue;
+            border-radius: 10px;
+            border: darkblue 4px solid;
+        }
+    
+        .menu-panel{
+            background-color:azure;
+            margin-left: 20px;
+            height: 200px;
+            width: 300px;
+            border-radius: 15px;
+            box-shadow: black 0px 6px 12px;
+        }
+    }    
 }
