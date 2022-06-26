@@ -16,16 +16,16 @@ function Dashboard(props) {
           geoCodes: Data.data[0].geoCodes,
           picture: {
             src: schoolLogo,
-            height: "65px",
-            width: "250px",
+            height: "50px",
+            width: "125px",
           },
         },
         {
           geoCodes: Data.data[1].geoCodes,
           picture: {
             src: collegeLogo,
-            height: "65px",
-            width: "250px",
+            height: "50px",
+            width: "125px",
           },
         },
       ];
