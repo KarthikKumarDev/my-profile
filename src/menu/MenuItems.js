@@ -21,7 +21,7 @@ function MenuItem(props) {
               }`}
               onClick={(event) => setMenuItemIndex(indexToUpdate)}
             >
-              <img src="./images/tech-icon.png" width="40px" />
+              <img src="./images/tech-icon.png" width="40px" alt="Menu Item" />
             </div>
           );
         })}

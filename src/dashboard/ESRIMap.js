@@ -44,7 +44,7 @@ function ESRIMap(props) {
         setIsMapLoaded(true);
     }, mapViewObjRef.current.spatialReferenceWarningDelay);
     }
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (mapDiv.current && mapObjRef.current) {

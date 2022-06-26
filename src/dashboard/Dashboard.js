@@ -30,10 +30,11 @@ function Dashboard(props) {
         },
       ];
       const geoCodes = Data.data.map((dataItem) => dataItem.geoCodes);
+      
       renderGraphicsLayer(markerData);
       recenterMap(geoCodes);
     }
-  }, [isMapLoaded]);
+  }, [isMapLoaded]);// eslint-disable-line react-hooks/exhaustive-deps
 
   return false;
 }

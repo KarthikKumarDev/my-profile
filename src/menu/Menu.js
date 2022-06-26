@@ -12,6 +12,7 @@ function Menu(props) {
           src={
             isMenuOpen ? "./images/book-open.png" : "./images/book-closed.png"
           }
+          alt="Menu"
           height="45px"
           onClick={(event) => setMenu(!isMenuOpen)}
         />
