@@ -14,7 +14,7 @@ import "./MapSelector.scss";
 function MapSelector(props) {
 
   const handleChange = (event) => {
-    props.setMapMode(event.target.value);
+    props.setMapType(event.target.value);
   };
 
   return (
@@ -46,7 +46,7 @@ function MapSelector(props) {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={props.currentMode}
+            value={props.currentType}
             label="Map Type"
             onChange={handleChange}
           >

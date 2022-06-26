@@ -11,14 +11,17 @@ export const MapTypes = ["satellite", "streets-vector", "gray-vector"];
 
 function App() {
   const [mapType, setMapType] = useState(MapTypes[0]);
+  const [mapMode, setMapMode] = useState(false);
   const [isResumeOpen, setResumeOpen] = useState(false);
 
   return (
     <div className="App">
       <Menu />
       <MapSelector
-        currentMode={mapType}
-        setMapMode={(value) => setMapType(value)}
+        currentMode={mapMode}
+        currentType={mapType}
+        setMapType={(value) => setMapType(value)}
+        setMapMode={(value) => setMapMode(value)}
         HandleOpenResume={(event) => setResumeOpen(true)}
       />
       <ESRIMap currentMode={mapType}></ESRIMap>
