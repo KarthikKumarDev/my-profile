@@ -7,6 +7,9 @@ import Point from "@arcgis/core/geometry/Point";
 import Polygon from "@arcgis/core/geometry/Polygon";
 import * as webMercatorUtils from "@arcgis/core/geometry/support/webMercatorUtils";
 
+import schoolLogo from "../images/school-logo.png";
+import collegeLogo from "../images/college-logo.png";
+
 import Dashboard from "./Dashboard";
 
 import "./ESRIMap.css";
@@ -17,8 +20,19 @@ function ESRIMap(props) {
 
   let mapObjRef = useRef(null);
 
+  const imageSelector = (imageName) => {
+    switch (imageName) {
+      case "school-logo":
+        return schoolLogo;
+      case "college-logo":
+        return collegeLogo;
+      default:
+        return schoolLogo;
+    }
+  };
+
   let mapViewObjRef = useRef(null);
-  const {currentMode} = props;
+  const { currentMode } = props;
   useEffect(() => {
     if (mapDiv.current) {
       /**
@@ -37,23 +51,40 @@ function ESRIMap(props) {
         map: mapObjRef.current,
       });
 
+      mapViewObjRef.current.popup.dockOptions = {
+        position: "bottom-left",
+      };
+
+      // mapViewObjRef.current.on("click", (event) => {
+      //   mapViewObjRef.current.hitTest(event).then((response) => {
+      //     console.log(response);
+      //     // only get the graphics returned from myLayer
+      //     const graphicHit = response.results[0];
+      //     if (graphicHit) {
+      //       const attributes = graphicHit.graphic.attributes;
+      //       // do something with the myLayer features returned from hittest
+      //       mapViewObjRef.current.popup.open();
+      //       console.log(graphicHit.graphic.attributes);
+      //     }
+      //   });
+      // });
+
       // Widget Positions
       mapViewObjRef.current.ui.move("zoom", "bottom-right");
 
       setTimeout(function () {
         setIsMapLoaded(true);
-    }, mapViewObjRef.current.spatialReferenceWarningDelay);
+      }, mapViewObjRef.current.spatialReferenceWarningDelay);
     }
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (mapDiv.current && mapObjRef.current) {
-
-       mapObjRef.current.basemap = Basemap.fromId(props.currentMode);
+      mapObjRef.current.basemap = Basemap.fromId(props.currentMode);
 
       setTimeout(function () {
         setIsMapLoaded(true);
-    }, mapViewObjRef.current.spatialReferenceWarningDelay);
+      }, mapViewObjRef.current.spatialReferenceWarningDelay);
     }
   }, [props.currentMode]);
 
@@ -103,7 +134,7 @@ function ESRIMap(props) {
 
   const addGraphicsMarkerLayer = (markerData) => {
     let customGraphicsList = [];
-    
+
     markerData.forEach((location) => {
       const point = {
         type: "point", // autocasts as new Point()
@@ -114,7 +145,7 @@ function ESRIMap(props) {
       // Create a symbol for drawing the point
       const markerSymbol = {
         type: "picture-marker", // autocasts as new PictureMarkerSymbol()
-        url: location.picture.src,
+        url: imageSelector(location.picture.src),
         width: location.picture.width,
         height: location.picture.height,
       };
@@ -123,7 +154,31 @@ function ESRIMap(props) {
       const pointGraphic = new Graphic({
         geometry: point,
         symbol: markerSymbol,
+        popupTemplate: {
+          title: "Details",
+          content: [
+            {
+              // Pass in the fields to display
+              type: "fields",
+              fieldInfos: [
+                {
+                  fieldName: "name",
+                  label: "Name",
+                },
+                {
+                  fieldName: "city",
+                  label: "City",
+                },
+                {
+                  fieldName: "state",
+                  label: "State",
+                },
+              ],
+            },
+          ],
+        },
       });
+      pointGraphic.attributes = location.attributes;
       customGraphicsList.push(pointGraphic);
     });
     mapViewObjRef.current.graphics.addMany(customGraphicsList);
