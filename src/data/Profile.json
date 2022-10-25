@@ -1,12 +1,18 @@
 {
-    "profile":[
-        {
-            "topic": "Technolgies & Languages",
-            "items":["ReactJS", "Angular", "Typescript"]
-        },
-        {
-            "topic": "Technolgies & Languages",
-            "items":["Dotnet", "NodeJs", "Entity Framework"]
-        }
-    ]
+  "profile": [
+    {
+      "topic": "Technolgies & Languages",
+      "items": ["ReactJS", "Angular", "Typescript"],
+      "icon": "tech-icon"
+    },
+    {
+      "topic": "Technolgies & Languages",
+      "items": ["Dotnet", "NodeJs", "Entity Framework"],
+      "icon": "tech-icon"
+    },
+    {
+      "topic": "GitHub Stats",
+      "icon": "stats-icon"
+    }
+  ]
 }
