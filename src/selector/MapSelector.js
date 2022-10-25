@@ -4,14 +4,22 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Dialog,
+  DialogTitle,
+  Grid,
+  IconButton,
 } from "@mui/material";
 import React from "react";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import InfoIcon from "@mui/icons-material/Info";
+import CloseIcon from "@mui/icons-material/Close";
 
+import About from "../dashboard/About";
 import { MapTypes } from "../App";
 import "./MapSelector.scss";
 
 function MapSelector(props) {
+  const [openInfo, setOpenInfo] = React.useState(false);
 
   const handleChange = (event) => {
     props.setMapType(event.target.value);
@@ -38,7 +46,20 @@ function MapSelector(props) {
           />
           Education
         </div>
-        <PictureAsPdfIcon color="primary" onClick={props.HandleOpenResume}/>
+        <PictureAsPdfIcon color="primary" onClick={props.HandleOpenResume} />
+        <InfoIcon color="primary" onClick={(event) => setOpenInfo(true)} />
+        <Dialog onClose={(event) => setOpenInfo(false)} open={openInfo}>
+          <DialogTitle>
+            <div className="info-panel">
+              About this App
+              <CloseIcon
+                aria-label="close"
+                onClick={(event) => setOpenInfo(false)}
+              />
+            </div>
+          </DialogTitle>
+          <About />
+        </Dialog>
       </div>
       <div className="map-type">
         <FormControl fullWidth>
@@ -51,7 +72,9 @@ function MapSelector(props) {
             onChange={handleChange}
           >
             {MapTypes.map((type, index) => (
-              <MenuItem key={index} value={type}>{type}</MenuItem>
+              <MenuItem key={index} value={type}>
+                {type}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

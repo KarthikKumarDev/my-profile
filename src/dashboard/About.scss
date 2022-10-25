@@ -1,0 +1,11 @@
+.about-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  padding: 30px;
+  background: dodgerblue;
+
+  div{
+    margin-bottom: 10px;
+  }
+}

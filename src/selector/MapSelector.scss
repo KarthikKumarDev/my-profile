@@ -1,10 +1,10 @@
-.map-controls{
+.map-controls {
     position: absolute;
     z-index: 1;
     right: 10px;
     top: 10px;
 
-    .radio-selector{
+    .radio-selector {
         background: whitesmoke;
         padding: 10px;
         border-radius: 5px;
@@ -12,16 +12,28 @@
         align-items: center;
         justify-content: space-between;
         width: 250px;
-    
-        input{
+
+        input {
             margin-right: 10px;
             margin-left: 10px;
         }
     }
 
-    .map-type{
+    .map-type {
         background: whitesmoke;
         padding: 10px;
         margin-top: 10px;
     }
+}
+
+
+#mui-1 {
+    background: black;
+    color: white;
+}
+
+.info-panel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
