@@ -39,9 +39,11 @@ function MenuItem(props) {
             {rowToShow?.items?.length ? (
               <div className="regular">
                 <div className="title">{rowToShow.topic}</div>
+                <ol>
                 {rowToShow.items?.map((item) => (
-                  <p>{item}</p>
+                  <li>{item}</li>
                 ))}
+                </ol>
               </div>
             ) : (
               <><GitHubStats/></>
