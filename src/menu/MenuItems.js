@@ -7,10 +7,12 @@ import GitHubStats from "../stats/GitHubStats";
 const ProfileData = rawData.default.profile;
 
 function MenuItem(props) {
-  const [currentMenuItem, setMenuItemIndex] = useState(null);
+  const [currentMenuItem, setCurrentMenuItem] = useState(null);
+  const [currentSubMenuItem, setCurrentSubMenuItem] = useState(null);
 
   const rowToShow =
     currentMenuItem != null ? ProfileData[currentMenuItem] : false;
+  // const htmlContent = {__html: rowToShow.items[currentSubMenuItem].stem};
   return (
     <div className="menu-wrapper">
       <div className="d-flex">
@@ -18,10 +20,11 @@ function MenuItem(props) {
           const indexToUpdate = currentMenuItem === index ? null : index;
           return (
             <div
+              key={index}
               className={`menu-item ${
                 index === currentMenuItem ? "selected-menu" : ""
               }`}
-              onClick={(event) => setMenuItemIndex(indexToUpdate)}
+              onClick={(event) => setCurrentMenuItem(indexToUpdate)}
             >
               <img
                 src={`./images/${item.icon}.png`}
@@ -40,16 +43,41 @@ function MenuItem(props) {
               <div className="regular">
                 <div className="title">{rowToShow.topic}</div>
                 <ol>
-                {rowToShow.items?.map((item) => (
-                  <li>{item}</li>
-                ))}
+                  {rowToShow.items?.map((item, index) => (
+                    <li
+                      className="list"
+                      onClick={(event) =>
+                        setCurrentSubMenuItem(
+                          currentSubMenuItem == item.id ? null : item.id
+                        )
+                      }
+                      key={index}
+                    >
+                      {item.name}
+                    </li>
+                  ))}
                 </ol>
               </div>
             ) : (
-              <><GitHubStats/></>
+              <>
+                <GitHubStats />
+              </>
             )}
           </div>
         </>
+      )}
+      {currentSubMenuItem != null && (
+        <div className="sub-menu-panel">
+          <div className="regular">
+            <div className="html-container">
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: rowToShow.items[currentSubMenuItem].stem,
+                }}
+              />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
