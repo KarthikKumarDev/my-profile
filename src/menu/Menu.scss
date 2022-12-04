@@ -5,7 +5,7 @@
     margin-top: 25px;
 
     .flip-menu {
-        background: aliceblue;
+        background: #f1f1f5;
         border-radius: 50px;
         padding: 5px;
         transition: all .2s ease-in-out;
@@ -14,7 +14,7 @@
     }
 
     .flip-menu:hover {
-        background: gold;
+        background: #a4a3de;
         transform: scale(1.1);
     }
 
@@ -24,7 +24,7 @@
         .menu-item {
             height: 60px;
             width: 60px;
-            background-color: aliceblue;
+            background-color: #f1f1f5;
             border-radius: 10px;
             border: darkblue 4px solid;
             height: 55px;
@@ -35,13 +35,17 @@
             }
         }
 
+        .menu-item:hover {
+            transform: scale(1.1);
+        }
+
         .selected-menu {
-            background-color: darkorange;
+            background-color: #a4a3de;
             border: white 4px solid;
         }
 
         .menu-panel {
-            background-color: #ffffff;
+            background-color: #f1f1f5;
             margin-top: 20px;
             margin-left: 20px;
             border-radius: 10px;
@@ -76,7 +80,7 @@
                     content: counter(list);
                     background: #2f96ff;
                     font-family: Arial, sans-serif;
-                    color: #fff;
+                    color: #f1f1f5;
                     font-size: 13px;
                     text-align: center;
                     border-radius: 50%;
@@ -88,13 +92,13 @@
                 }
 
                 ol li:hover {
-                    background: orange;
+                    background: #a4a3de;
                 }
 
             }
 
             .title {
-                background: darkorange;
+                background: #a4a3de;
                 padding: 5px;
                 margin: auto;
                 margin-top: -35px;
@@ -104,7 +108,7 @@
         }
 
         .sub-menu-panel {
-            background-color: #ffffff;
+            background-color: #f1f1f5;
             margin-top: 20px;
             margin-left: 20px;
             border-radius: 10px;
