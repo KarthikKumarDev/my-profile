@@ -20,13 +20,13 @@ const LanguageStats = (props) => {
     },
   };
   useEffect(() => {
-    const labels = [...Object.keys(props.stats)]
+    const labels = props.stats.map(e => e.key)
     const data = {
       labels: labels,
       datasets: [
         {
           label: "# by Languages",
-          data: values(props.stats),
+          data: props.stats.map(e => e.value),
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(255, 159, 64, 0.2)",

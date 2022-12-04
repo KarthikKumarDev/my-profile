@@ -9,7 +9,7 @@ export const getLanguageStats = (repoData) => {
   });
   delete languages["null"];
 
-//   console.log(languages);
-
-  return languages;
+  var languagesList = Object.keys(languages).map(item => { return {key: item, value: languages[item]}})
+  return languagesList.sort((a, b) => b.value - a.value);
 };
+

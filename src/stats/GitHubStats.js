@@ -7,12 +7,11 @@ import "./GitHubStats.scss";
 
 function GitHubStats() {
   const [reposData, setReposData] = useState([]);
-  const [languageStats, setLanguageStats] = useState({});
+  const [languageStats, setLanguageStats] = useState([]);
 
   useEffect(() => {
     (async () => {
       const repoData = (await getUserRepos()).data;
-      console.log(repoData);
       setReposData(repoData);
     })();
   }, []);

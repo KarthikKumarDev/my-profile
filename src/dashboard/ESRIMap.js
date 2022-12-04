@@ -55,20 +55,6 @@ function ESRIMap(props) {
         position: "bottom-left",
       };
 
-      // mapViewObjRef.current.on("click", (event) => {
-      //   mapViewObjRef.current.hitTest(event).then((response) => {
-      //     console.log(response);
-      //     // only get the graphics returned from myLayer
-      //     const graphicHit = response.results[0];
-      //     if (graphicHit) {
-      //       const attributes = graphicHit.graphic.attributes;
-      //       // do something with the myLayer features returned from hittest
-      //       mapViewObjRef.current.popup.open();
-      //       console.log(graphicHit.graphic.attributes);
-      //     }
-      //   });
-      // });
-
       // Widget Positions
       mapViewObjRef.current.ui.move("zoom", "bottom-right");
 
