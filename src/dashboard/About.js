@@ -3,7 +3,7 @@ import './About.scss';
 const About = () => {
   return (
     <div className='about-wrapper'>
-      <div>App Version: 0.3</div>
+      <div>App Version: 0.4</div>
       <div>
       Git Repository: <a href='https://github.com/KarthikKumarDev/my-profile' target="_blank"> My Profile Repo </a>
       </div>
