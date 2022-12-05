@@ -2,11 +2,12 @@
   "profile": [
     {
       "topic": "Technologies & Languages",
+      "itemHeader": "Project Details",
       "items": [
         {
           "id": 0,
           "name": "ReactJS",
-          "stem": " <h2> React UI Library </h2> <h3 style='color:darkblue;'>1. Media UI Project </h3> We have developed the UI portal to get the media details and <h3 style='color:darkorchid;'>2. Aigis Web Application</h3> Developed a React UI application to build a suite of 16+ applications for Security and surveillance project. We had used ESRI Map library to show various types of maps visualisation like <ol> <li>Clustering Visualisation</li><li>Heatmap Visualisation</li><li>Map layer with Custom Icons</li><li>Worked with ESRI Team to create a Custom logic to meet business requirements</li></ol> We have developed a on-premised CDN server to cater our offline requirements of the Production Topology. We have released the Application as an MSI Installer by generating the installation using WiX Toolset "
+          "stem": "<h3 style='color:darkblue;'>1. Media UI Project </h3> We have developed the UI portal to get the media details and <h3 style='color:darkorchid;'>2. Aigis Web Application</h3> Developed a React UI application to build a suite of 16+ applications for Security and surveillance project. We had used ESRI Map library to show various types of maps visualisation like <ol> <li>Clustering Visualisation</li><li>Heatmap Visualisation</li><li>Map layer with Custom Icons</li><li>Worked with ESRI Team to create a Custom logic to meet business requirements</li></ol> We have developed a on-premised CDN server to cater our offline requirements of the Production Topology. We have released the Application as an MSI Installer by generating the installation using WiX Toolset "
         },
         {
           "id": 1,

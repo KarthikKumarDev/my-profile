@@ -69,6 +69,7 @@ function MenuItem(props) {
       {currentMenuItem == 0 && currentSubMenuItem != null && (
         <div className="sub-menu-panel">
           <div className="regular">
+          <div className="title">{rowToShow?.itemHeader}</div>
             <div className="html-container">
               <span
                 dangerouslySetInnerHTML={{
