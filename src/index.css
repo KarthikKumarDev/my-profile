@@ -20,3 +20,8 @@ code {
   height: 100%;
   width: 100%;
 }
+
+:root{
+  --primary:#6b6da5;
+  --secondary:#f1f1f5;
+}

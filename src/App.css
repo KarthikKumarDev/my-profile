@@ -86,4 +86,7 @@
   font-weight: bold;
 }
 
+body{
+  color: var(--primary);
+}
 

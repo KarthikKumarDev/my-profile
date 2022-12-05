@@ -5,7 +5,7 @@
     margin-top: 25px;
 
     .flip-menu {
-        background: #f1f1f5;
+        background: var(--secondary);
         border-radius: 50px;
         padding: 5px;
         transition: all .2s ease-in-out;
@@ -14,7 +14,8 @@
     }
 
     .flip-menu:hover {
-        background: #a4a3de;
+        background: var(--primary);
+        color: white;
         transform: scale(1.1);
     }
 
@@ -24,9 +25,9 @@
         .menu-item {
             height: 60px;
             width: 60px;
-            background-color: #f1f1f5;
+            background-color: var(--secondary);
             border-radius: 10px;
-            border: darkblue 4px solid;
+            border: var(--primary) 4px solid;
             height: 55px;
             margin-top: 20px;
 
@@ -40,17 +41,17 @@
         }
 
         .selected-menu {
-            background-color: #a4a3de;
+            background-color: var(--primary);
             border: white 4px solid;
         }
 
         .menu-panel {
-            background-color: #f1f1f5;
+            background-color: var(--secondary);
             margin-top: 20px;
-            margin-left: 20px;
+            margin-left: 5px;
             border-radius: 10px;
             box-shadow: black 0px 2px 6px;
-            animation: 1s ease-out 0s 1 slideInFromLeft;
+            animation: 0.5s ease-out 0s 1 slideInFromLeft;
             height: fit-content;
 
             .regular {
@@ -78,9 +79,9 @@
 
                 ol li::before {
                     content: counter(list);
-                    background: #2f96ff;
+                    background: var(--primary);
                     font-family: Arial, sans-serif;
-                    color: #f1f1f5;
+                    color: var(--secondary);
                     font-size: 13px;
                     text-align: center;
                     border-radius: 50%;
@@ -92,13 +93,17 @@
                 }
 
                 ol li:hover {
-                    background: #a4a3de;
+                    background: var(--primary);
+                    color: white;
+
                 }
 
             }
 
             .title {
-                background: #a4a3de;
+                background: var(--primary);
+                color: white;
+
                 padding: 5px;
                 margin: auto;
                 margin-top: -35px;
@@ -108,13 +113,13 @@
         }
 
         .sub-menu-panel {
-            background-color: #f1f1f5;
+            background-color: var(--secondary);
             margin-top: 20px;
-            margin-left: 20px;
-            border-radius: 10px;
+            margin-left: 5px;
             box-shadow: black 0px 2px 6px;
-            animation: 1s ease-out 0s 1 slideInFromLeft;
+            animation: 0.5s ease-out 0s 1 slideInFromLeft;
             width: 600px;
+            border-radius: 10px;
 
             .regular {
                 text-align: left;
@@ -123,6 +128,17 @@
                     margin: 10px;
                     ;
                 }
+            }
+
+            .title {
+                background: var(--primary);
+                color: white;
+
+                padding: 5px;
+                margin: auto;
+                margin-top: -35px;
+                border-radius: 10px;
+                border: 2px white solid;
             }
 
         }

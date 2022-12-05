@@ -4,5 +4,5 @@
 }
 
 .esri-attribution{
-    background: #a4a3de;
+    background: var(--primary);
 }
