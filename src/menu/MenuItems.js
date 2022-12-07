@@ -45,7 +45,7 @@ function MenuItem(props) {
                 <ol>
                   {rowToShow.items?.map((item, index) => (
                     <li
-                      className="list"
+                      className={`list ${ currentSubMenuItem == item.id ? "selected" : "" }`}
                       onClick={(event) =>
                         setCurrentSubMenuItem(
                           currentSubMenuItem == item.id ? null : item.id
