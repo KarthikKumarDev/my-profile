@@ -3,6 +3,7 @@ import { getUserRepos } from "../services/gitHub.services";
 import { getLanguageStats } from "../helpers/gitHub.helpers";
 
 import LanguageStats from "./LanguageStats";
+import CircularStats from "./CircularStats";
 import "./GitHubStats.scss";
 
 function GitHubStats() {
@@ -23,6 +24,9 @@ function GitHubStats() {
   return (
     <div className="large-panel">
       <div className="title">GitHub Stats</div>
+      <div className="circular-stats">
+        <CircularStats value={reposData.length} desc={"Total Repos"} />
+      </div>
       <LanguageStats stats={languageStats} />
     </div>
   );
