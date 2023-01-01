@@ -5,10 +5,10 @@ const About = () => {
     <div className='about-wrapper'>
       <div>App Version: 0.4</div>
       <div>
-      Git Repository: <a href='https://github.com/KarthikKumarDev/my-profile' target="_blank"> My Profile Repo </a>
+      Git Repository: <a href='https://github.com/KarthikKumarDev/my-profile' target="_blank" rel="noopener noreferrer"> My Profile Repo </a>
       </div>
       <div>
-      CI/CD Pipeline: <a href='https://app.travis-ci.com/github/KarthikKumarDev/my-profile' target="_blank"> Travis Build </a>
+      CI/CD Pipeline: <a href='https://app.travis-ci.com/github/KarthikKumarDev/my-profile' target="_blank" rel="noopener noreferrer"> Travis Build </a>
       </div>
     </div>
   );

@@ -45,10 +45,10 @@ function MenuItem(props) {
                 <ol>
                   {rowToShow.items?.map((item, index) => (
                     <li
-                      className={`list ${ currentSubMenuItem == item.id ? "selected" : "" }`}
+                      className={`list ${ currentSubMenuItem === item.id ? "selected" : "" }`}
                       onClick={(event) =>
                         setCurrentSubMenuItem(
-                          currentSubMenuItem == item.id ? null : item.id
+                          currentSubMenuItem === item.id ? null : item.id
                         )
                       }
                       key={index}
@@ -66,7 +66,7 @@ function MenuItem(props) {
           </div>
         </>
       )}
-      {currentMenuItem == 0 && currentSubMenuItem != null && (
+      {currentMenuItem === 0 && currentSubMenuItem != null && (
         <div className="sub-menu-panel">
           <div className="regular">
           <div className="title">{rowToShow?.itemHeader}</div>
