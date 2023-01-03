@@ -14,8 +14,8 @@ function Dashboard(props) {
           geoCodes: record.geoCodes,
           picture: {
             src: record.logo,
-            height: "40px",
-            width: "125px",
+            height: "50px",
+            width: "50px",
           },
           attributes: {
             name: record.name,
