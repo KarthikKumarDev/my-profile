@@ -74,7 +74,7 @@
 }
 
 .esri-widget__table tr:nth-child(odd), .esri-widget__table tr:nth-child(even){
-  background-color: white;
+  background: var(--secondary);
 }
 
 .esri-feature-fields__field-header{
