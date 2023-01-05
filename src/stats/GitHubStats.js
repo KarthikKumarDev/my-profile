@@ -7,44 +7,55 @@ import CircularStats from "./CircularStats";
 import "./GitHubStats.scss";
 
 function GitHubStats() {
-  const [reposData, setReposData] = useState([]);
-  const [eventsData, setEventsData] = useState([]);
+  const [reposData, setReposData] = useState(null);
+  const [eventsData, setEventsData] = useState(null);
   const [languageStats, setLanguageStats] = useState([]);
-  const [forkCount, setForkCount] = useState(0);
-  const [activeCount, setActiveCount] = useState(0);
+  const [forkCount, setForkCount] = useState(null);
+  const [activeCount, setActiveCount] = useState(null);
 
   useEffect(() => {
     (async () => {
       const repoData = (await getUserRepos()).data;
       setReposData(repoData);
-      
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
-      const events  = (await getUserEvents()).data;
+      const events = (await getUserEvents()).data;
       setEventsData(events);
     })();
   }, []);
 
   useEffect(() => {
-    const forkCount = reposData.filter(repo => repo.fork === true).length
+    const forkCount = reposData?.filter((repo) => repo.fork === true).length;
     setForkCount(forkCount);
-    setLanguageStats(getLanguageStats(reposData));
+    reposData && setLanguageStats(getLanguageStats(reposData));
   }, [reposData]);
 
-  useEffect(() =>{
-    setActiveCount(getActiveRepos(eventsData));
-  }, [eventsData])
+  useEffect(() => {
+    eventsData && setActiveCount(getActiveRepos(eventsData));
+  }, [eventsData]);
 
   return (
     <div className="large-panel">
       <div className="title">GitHub Stats</div>
       <div className="circular-stats">
-        <CircularStats value={reposData.length - forkCount} desc={"Total Repos"} />
-        <CircularStats value={forkCount} desc={"Forked Repos"} />
-        <CircularStats value={activeCount} desc={"Active Repos"} />
+        <CircularStats
+          showLoader={reposData == null || eventsData == null}
+          value={reposData?.length - forkCount}
+          desc={"Total Repos"}
+        />
+        <CircularStats
+          showLoader={eventsData == null}
+          value={forkCount}
+          desc={"Forked Repos"}
+        />
+        <CircularStats
+          showLoader={eventsData == null}
+          value={activeCount}
+          desc={"Active Repos"}
+        />
       </div>
       {languageStats && <LanguageStats stats={languageStats} />}
     </div>
