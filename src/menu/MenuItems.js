@@ -1,33 +1,59 @@
 import "./Menu.scss";
-import * as rawData from "../data/Profile.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import GitHubStats from "../stats/GitHubStats";
-
-const ProfileData = rawData.default.profile;
+import { getSheetValuesByName } from "../services/gSheet.services";
+import { arrayToObject } from "../helpers/common.helpers";
 
 function MenuItem(props) {
   const [currentMenuItem, setCurrentMenuItem] = useState(null);
   const [currentSubMenuItem, setCurrentSubMenuItem] = useState(null);
+  const [contentData, setContentData] = useState([]);
+  const [topicsData, setTopicsData] = useState([]);
 
-  const rowToShow =
-    currentMenuItem != null ? ProfileData[currentMenuItem] : false;
-  // const htmlContent = {__html: rowToShow.items[currentSubMenuItem].stem};
+  useEffect(() => {
+    (async () => {
+      const contentData = (await getSheetValuesByName("Content")).data;
+      setContentData(arrayToObject(contentData.values));
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const topicsData = (await getSheetValuesByName("Topics")).data;
+      setTopicsData(arrayToObject(topicsData.values));
+    })();
+  }, []);
+
+  const menuToShow =
+    currentMenuItem != null
+      ? topicsData.find((item) => item.Id === currentMenuItem)
+      : false;
+
+  const subMenusToShow =
+    currentMenuItem != null
+      ? contentData.filter((item) => item.TopicId === currentMenuItem)
+      : false;
+
+  const selectedSubMenu = contentData.find(
+    (item) => item.Id === currentSubMenuItem
+  );
+
   return (
     <div className="menu-wrapper">
       <div className="d-flex">
-        {ProfileData.map((item, index) => {
-          const indexToUpdate = currentMenuItem === index ? null : index;
+        {topicsData.map((item, index) => {
+          const indexToUpdate = currentMenuItem === item.Id ? null : item.Id;
           return (
             <div
               key={index}
               className={`menu-item ${
-                index === currentMenuItem ? "selected-menu" : ""
+                item.Id === currentMenuItem ? "selected-menu" : ""
               }`}
               onClick={(event) => setCurrentMenuItem(indexToUpdate)}
             >
               <img
-                src={`./images/${item.icon}.png`}
+                src={`./images/${item.Icon}.png`}
                 width="40px"
                 alt="Menu Item"
               />
@@ -36,44 +62,48 @@ function MenuItem(props) {
         })}
       </div>
 
-      {rowToShow && (
+      {menuToShow && (
         <>
           <div className="menu-panel">
-            {rowToShow?.items?.length ? (
+            {menuToShow.SubMenu === "TRUE" && subMenusToShow.length ? (
               <div className="regular">
-                <div className="title">{rowToShow.topic}</div>
+                <div className="title">{menuToShow.Name}</div>
                 <ol>
-                  {rowToShow.items?.map((item, index) => (
+                  {subMenusToShow?.map((item, index) => (
                     <li
-                      className={`list ${ currentSubMenuItem === item.id ? "selected" : "" }`}
+                      className={`list ${
+                        currentSubMenuItem === item.Id ? "selected" : ""
+                      }`}
                       onClick={(event) =>
                         setCurrentSubMenuItem(
-                          currentSubMenuItem === item.id ? null : item.id
+                          currentSubMenuItem === item.Id ? null : item.Id
                         )
                       }
                       key={index}
                     >
-                      {item.name}
+                      {item.ContentTitle}
                     </li>
                   ))}
                 </ol>
               </div>
-            ) : (
+            ) : menuToShow.Id === "2" ? (
               <>
                 <GitHubStats />
               </>
+            ) : (
+              <></>
             )}
           </div>
         </>
       )}
-      {currentMenuItem === 0 && currentSubMenuItem != null && (
+      {selectedSubMenu && menuToShow.SubMenu === "TRUE" && (
         <div className="sub-menu-panel">
           <div className="regular">
-          <div className="title">{rowToShow?.itemHeader}</div>
+            <div className="title">{selectedSubMenu.ContentTitle}</div>
             <div className="html-container">
               <span
                 dangerouslySetInnerHTML={{
-                  __html: rowToShow?.items[currentSubMenuItem]?.stem,
+                  __html: selectedSubMenu?.Stem,
                 }}
               />
             </div>
