@@ -1,31 +1,43 @@
-import { useEffect } from "react";
-import * as rawData from "../data/Data.json";
+import { useEffect, useState } from "react";
 
-const Data = rawData.default;
+import { getSheetValuesByName } from "../services/gSheet.services";
+import { arrayToObject } from "../helpers/common.helpers";
 
 function Dashboard(props) {
   const { isMapLoaded, renderGraphicsLayer, recenterMap } = props;
 
+  const [geoData, setGeoData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const geoData = (await getSheetValuesByName("Geo")).data;
+      setGeoData(arrayToObject(geoData.values));
+    })();
+  }, []);
+
   useEffect(() => {
     if (isMapLoaded) {
       let markerData = [];
-      Data.data.forEach((record) => {
+      geoData.forEach((record) => {
         markerData.push({
-          geoCodes: record.geoCodes,
+          geoCodes: {
+            "latitude": record.Latitude,
+            "longitude": record.Longitude
+          },
           picture: {
-            src: record.logo,
+            src: record.Logo,
             height: "50px",
             width: "50px",
           },
           attributes: {
-            name: record.name,
-            city: record.city,
-            state: record.state,
+            name: record.Name,
+            city: record.City,
+            state: record.State,
           },
         });
       });
 
-      const geoCodes = Data.data.map((dataItem) => dataItem.geoCodes);
+      const geoCodes = markerData.map((record) => record.geoCodes);
 
       renderGraphicsLayer(markerData);
       recenterMap(geoCodes);
