@@ -16,7 +16,7 @@ export const getLanguageStats = (repoData) => {
 };
 
 export const getActiveRepos = (eventData) => {
-  const myEvents = eventData.filter(event => event.actor.id === 24319113 && event.type != "WatchEvent");
+  const myEvents = eventData.filter(event => event.actor.id === 24319113 && event.type !== "WatchEvent");
 
   const result = myEvents.reduce((total, value) => {
     total[value.repo.name] = (total[value.repo.name] || 0) + 1;
