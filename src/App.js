@@ -7,7 +7,7 @@ import Resume from "./resume/Resume";
 import MapSelector from "./selector/MapSelector";
 import Menu from "./menu/Menu";
 
-export const MapTypes = ["satellite", "streets-vector", "gray-vector"];
+export const MapTypes = ["hybrid", "streets-vector", "gray-vector"];
 
 function App() {
   const [mapType, setMapType] = useState(MapTypes[0]);

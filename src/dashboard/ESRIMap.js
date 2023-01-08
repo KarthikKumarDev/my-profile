@@ -75,6 +75,12 @@ function ESRIMap(props) {
   }, [props.currentMode]);
 
   const recenterMap = (locations, zoomLevel) => {
+    let options = {
+      duration: 1000,
+      animate: true,
+      easing: "ease",
+    };
+
     if (mapViewObjRef.current && locations && locations.length > 0) {
       if (locations.length > 1 || zoomLevel) {
         const allCoordinatesArea = [];
@@ -93,16 +99,17 @@ function ESRIMap(props) {
         const graphic = new Graphic({
           geometry: globalePolygon,
         });
-        mapViewObjRef.current.extent = graphic.geometry.extent;
+
+        mapViewObjRef.current.goTo(
+          {
+            target: graphic.geometry,
+          },
+          options
+        );
         mapViewObjRef.current.zoom = zoomLevel
           ? zoomLevel
           : mapViewObjRef.current.zoom - 1;
       } else {
-        let options = {
-          duration: 1000,
-          animate: true,
-          easing: "ease",
-        };
         let pt = new Point({
           longitude: locations[0].longitude,
           latitude: locations[0].latitude,
