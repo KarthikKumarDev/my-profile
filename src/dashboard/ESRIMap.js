@@ -58,6 +58,28 @@ function ESRIMap(props) {
       // Widget Positions
       mapViewObjRef.current.ui.move("zoom", "bottom-right");
 
+      mapViewObjRef.current.popup.autoOpenEnabled = false;
+
+      mapViewObjRef.current.on("click", (event) => {
+        mapViewObjRef.current.hitTest(event).then((response) => {
+          // only get the graphics returned from myLayer
+          const graphicHits = response.results?.filter(
+            (hitResult) => hitResult.type === "graphic" //&& hitResult.graphic.layer === myLayer
+          );
+          if (graphicHits?.length > 0) {
+            // do something with the myLayer features returned from hittest
+            graphicHits.forEach((graphicHit) => {
+              console.log(graphicHit.graphic.attributes);
+            });
+
+            mapViewObjRef.current.popup.open({
+              location: event.mapPoint,
+              content: "<h1>" + graphicHits[0].graphic.attributes.Popup + "</h1>",
+            });
+          }
+        });
+      });
+
       setTimeout(function () {
         setIsMapLoaded(true);
       }, mapViewObjRef.current.spatialReferenceWarningDelay);
@@ -147,29 +169,6 @@ function ESRIMap(props) {
       const pointGraphic = new Graphic({
         geometry: point,
         symbol: markerSymbol,
-        popupTemplate: {
-          title: "Details",
-          content: [
-            {
-              // Pass in the fields to display
-              type: "fields",
-              fieldInfos: [
-                {
-                  fieldName: "name",
-                  label: "Name",
-                },
-                {
-                  fieldName: "city",
-                  label: "City",
-                },
-                {
-                  fieldName: "state",
-                  label: "State",
-                },
-              ],
-            },
-          ],
-        },
       });
       pointGraphic.attributes = location.attributes;
       customGraphicsList.push(pointGraphic);

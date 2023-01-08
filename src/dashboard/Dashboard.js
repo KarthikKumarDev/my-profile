@@ -33,6 +33,7 @@ function Dashboard(props) {
             name: record.Name,
             city: record.City,
             state: record.State,
+            Popup: record.PopupStem
           },
         });
       });
