@@ -65,13 +65,13 @@ function MapSelector(props) {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={props.currentType}
+            value={props.currentType.value}
             label="Map Type"
             onChange={handleChange}
           >
             {MapTypes.map((type, index) => (
-              <MenuItem key={index} value={type}>
-                {type}
+              <MenuItem key={index} value={type.value}>
+                {type.label}
               </MenuItem>
             ))}
           </Select>

@@ -7,7 +7,11 @@ import Resume from "./resume/Resume";
 import MapSelector from "./selector/MapSelector";
 import Menu from "./menu/Menu";
 
-export const MapTypes = ["hybrid", "streets-vector", "gray-vector"];
+export const MapTypes = [
+  { label: "Geo-Hybrid", value: "hybrid" },
+  { label: "Streets Vector", value: "streets-vector" },
+  { label: "Gray Vector", value: "gray-vector" },
+];
 
 function App() {
   const [mapType, setMapType] = useState(MapTypes[0]);
@@ -20,11 +24,15 @@ function App() {
       <MapSelector
         currentMode={mapMode}
         currentType={mapType}
-        setMapType={(value) => setMapType(value)}
+        setMapType={(value) =>
+          setMapType(
+            MapTypes.find((item) => item.value === value) || MapTypes[0]
+          )
+        }
         setMapMode={(value) => setMapMode(value)}
         HandleOpenResume={(event) => setResumeOpen(true)}
       />
-      <ESRIMap currentMode={mapType}></ESRIMap>
+      <ESRIMap currentMode={mapType.value}></ESRIMap>
       <Resume
         isOpen={isResumeOpen}
         handleClose={(event) => setResumeOpen(false)}
