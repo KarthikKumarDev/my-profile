@@ -64,7 +64,9 @@ function ESRIMap(props) {
         mapViewObjRef.current.hitTest(event).then((response) => {
           // only get the graphics returned from myLayer
           const graphicHits = response.results?.filter(
-            (hitResult) => hitResult.type === "graphic" //&& hitResult.graphic.layer === myLayer
+            (hitResult) =>
+              hitResult.type === "graphic" &&
+              hitResult.graphic.layer.title !== "Hybrid Reference Layer"
           );
           if (graphicHits?.length > 0) {
             // do something with the myLayer features returned from hittest
@@ -74,7 +76,8 @@ function ESRIMap(props) {
 
             mapViewObjRef.current.popup.open({
               location: event.mapPoint,
-              content: "<h1>" + graphicHits[0].graphic.attributes.Popup + "</h1>",
+              content:
+                "<h1>" + graphicHits[0].graphic.attributes.Popup + "</h1>",
             });
           }
         });
@@ -98,7 +101,7 @@ function ESRIMap(props) {
 
   const recenterMap = (locations, zoomLevel) => {
     let options = {
-      duration: 1000,
+      duration: 2000,
       animate: true,
       easing: "ease",
     };
