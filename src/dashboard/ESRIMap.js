@@ -12,7 +12,7 @@ import collegeLogo from "../images/college-logo.png";
 
 import Dashboard from "./Dashboard";
 
-import "./ESRIMap.css";
+import "./ESRIMap.scss";
 
 function ESRIMap(props) {
   const mapDiv = useRef(null);
@@ -76,9 +76,10 @@ function ESRIMap(props) {
 
             mapViewObjRef.current.popup.open({
               location: event.mapPoint,
-              content:
-                "<h1>" + graphicHits[0].graphic.attributes.Popup + "</h1>",
+              content: graphicHits[0].graphic.attributes.Popup,
             });
+            // console.log(document.getElementsByClassName('esri-feature__content-node'))
+            // document.getElementsByClassName('esri-feature__content-node')[0].innerHTML = graphicHits[0].graphic.attributes.Popup;
           }
         });
       });
