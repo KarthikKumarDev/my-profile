@@ -51,10 +51,6 @@ function ESRIMap(props) {
         map: mapObjRef.current,
       });
 
-      mapViewObjRef.current.popup.dockOptions = {
-        position: "bottom-left",
-      };
-
       // Widget Positions
       mapViewObjRef.current.ui.move("zoom", "bottom-right");
 
@@ -69,17 +65,17 @@ function ESRIMap(props) {
               hitResult.graphic.layer.title !== "Hybrid Reference Layer"
           );
           if (graphicHits?.length > 0) {
-            // do something with the myLayer features returned from hittest
-            graphicHits.forEach((graphicHit) => {
-              console.log(graphicHit.graphic.attributes);
-            });
-
             mapViewObjRef.current.popup.open({
               location: event.mapPoint,
               content: graphicHits[0].graphic.attributes.Popup,
             });
-            // console.log(document.getElementsByClassName('esri-feature__content-node'))
-            // document.getElementsByClassName('esri-feature__content-node')[0].innerHTML = graphicHits[0].graphic.attributes.Popup;
+
+            mapViewObjRef.current.popup.when((popUpStatusChange) => {
+              if (popUpStatusChange) {
+                document.getElementsByClassName("popup-content")[0].innerHTML =
+                  graphicHits[0].graphic.attributes.Popup;
+              }
+            });
           }
         });
       });

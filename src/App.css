@@ -52,6 +52,10 @@
   color: white;
 }
 
+.esri-popup__button--dock{
+  display: none;
+}
+
 .esri-popup__header-buttons, .esri-popup__header{
   background: black;
 }

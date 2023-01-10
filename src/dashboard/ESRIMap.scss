@@ -6,32 +6,3 @@
 .esri-attribution {
   background: var(--primary);
 }
-
-.popup-content {
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 10px;
-  }
-
-  .header-text {
-    text-align: center;
-    margin-left: 10px;
-  }
-
-  .h1 {
-    font-size: 18px;
-    font-weight: 800;
-  }
-
-  .h2 {
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .h3 {
-    font-size: 14px;
-    font-weight: 400
-  }
-}
