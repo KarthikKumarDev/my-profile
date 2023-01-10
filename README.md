@@ -1,3 +1,4 @@
+![](https://api.travis-ci.com/KarthikKumarDev/my-profile.svg?branch=master&status=started)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
