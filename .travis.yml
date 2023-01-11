@@ -5,6 +5,7 @@ cache:
   directories:
     - node_modules
 script:
+  - export REACT_APP_VERSION=$TRAVIS_BUILD_NUMBER
   - npm i
   - npm run build
 deploy:
