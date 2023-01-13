@@ -70,12 +70,8 @@ function ESRIMap(props) {
               content: graphicHits[0].graphic.attributes.Popup,
             });
 
-            mapViewObjRef.current.popup.when((popUpStatusChange) => {
-              if (popUpStatusChange) {
-                document.getElementsByClassName("popup-content")[0].innerHTML =
-                  graphicHits[0].graphic.attributes.Popup;
-              }
-            });
+            document.getElementById("style-span").innerHTML =
+              graphicHits[0].graphic.attributes.Popup;
           }
         });
       });

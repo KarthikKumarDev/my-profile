@@ -37,6 +37,7 @@ function App() {
         isOpen={isResumeOpen}
         handleClose={(event) => setResumeOpen(false)}
       />
+      <span id="style-span" style={{display:"none"}}/>
     </div>
   );
 }
