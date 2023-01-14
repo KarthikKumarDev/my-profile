@@ -9,6 +9,8 @@ import Menu from "./menu/Menu";
 
 export const MapTypes = [
   { label: "Geo-Hybrid", value: "hybrid" },
+  { label: "Open Street Map", value: "osm" },
+  { label: "Nat Geo", value: "national-geographic" },
   { label: "Streets Vector", value: "streets-vector" },
   { label: "Gray Vector", value: "gray-vector" },
 ];

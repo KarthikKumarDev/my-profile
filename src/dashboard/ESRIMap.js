@@ -67,7 +67,8 @@ function ESRIMap(props) {
           if (graphicHits?.length > 0) {
             mapViewObjRef.current.popup.open({
               location: event.mapPoint,
-              content: graphicHits[0].graphic.attributes.Popup,
+              content: graphicHits[0].graphic.attributes.Popup || '',
+              title: graphicHits[0].graphic.attributes.city || "Location",
             });
 
             document.getElementById("style-span").innerHTML =

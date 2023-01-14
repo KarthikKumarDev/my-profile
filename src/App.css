@@ -41,11 +41,11 @@
 
 .esri-popup__main-container{
   width: 450px !important;
+  max-height: 700px;
 }
 
 .esri-popup__header-container--button, .esri-popup__header-container--button:hover{
-  background: #00007f;
-  margin-top: -1px
+  background: #1b076e;
 }
 
 .esri-popup__header-title, .esri-popup__button{
