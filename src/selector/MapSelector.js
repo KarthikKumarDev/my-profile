@@ -44,8 +44,8 @@ function MapSelector(props) {
           />
           Education
         </div>
-        <PictureAsPdfIcon color="primary" onClick={props.HandleOpenResume} />
-        <InfoIcon color="primary" onClick={(event) => setOpenInfo(true)} />
+        <PictureAsPdfIcon color="inherit" onClick={props.HandleOpenResume} />
+        <InfoIcon color="inherit" onClick={(event) => setOpenInfo(true)} />
         <Dialog onClose={(event) => setOpenInfo(false)} open={openInfo}>
           <DialogTitle>
             <div className="info-panel">

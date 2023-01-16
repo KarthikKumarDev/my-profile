@@ -39,13 +39,25 @@
   }
 }
 
+input[type='radio'] {
+  accent-color: var(--primary)
+}
+
 .esri-popup__main-container{
   width: 450px !important;
   max-height: 700px;
 }
 
 .esri-popup__header-container--button, .esri-popup__header-container--button:hover{
-  background: #1b076e;
+  background: var(--primary);
+}
+
+.esri-popup__header{
+  box-shadow: -1px 4px 16px black;
+}
+
+.esri-popup__collapse-icon{
+  display: none;
 }
 
 .esri-popup__header-title, .esri-popup__button{
