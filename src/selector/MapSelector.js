@@ -13,7 +13,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import CloseIcon from "@mui/icons-material/Close";
 
 import About from "../dashboard/About";
-import { MapTypes } from "../App";
+import { MapDataTypes, MapTypes } from "../App";
 import "./MapSelector.scss";
 
 function MapSelector(props) {
@@ -30,19 +30,19 @@ function MapSelector(props) {
           <input
             type="radio"
             name="rg1"
-            checked={props.currentMode}
-            onChange={() => props.setMapMode(true)}
+            checked={props.currentMapDataType === 1}
+            onChange={() => props.setMapDataType(MapDataTypes.Educational)}
           />
-          Work
+          {Object.keys(MapDataTypes)[0]}
         </div>
         <div>
           <input
             type="radio"
             name="rg1"
-            checked={!props.currentMode}
-            onChange={() => props.setMapMode(false)}
+            checked={props.currentMapDataType === 2}
+            onChange={() => props.setMapDataType(MapDataTypes.Professional)}
           />
-          Education
+          {Object.keys(MapDataTypes)[1]}
         </div>
         <PictureAsPdfIcon color="inherit" onClick={props.HandleOpenResume} />
         <InfoIcon color="inherit" onClick={(event) => setOpenInfo(true)} />
@@ -65,7 +65,7 @@ function MapSelector(props) {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={props.currentType.value}
+            value={props.currentMapType.value}
             label="Map Type"
             onChange={handleChange}
           >

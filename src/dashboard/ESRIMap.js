@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import Graphic from "@arcgis/core/Graphic";
+import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import Basemap from "@arcgis/core/Basemap";
 import Point from "@arcgis/core/geometry/Point";
 import Polygon from "@arcgis/core/geometry/Polygon";
@@ -32,7 +33,7 @@ function ESRIMap(props) {
   };
 
   let mapViewObjRef = useRef(null);
-  const { currentMode } = props;
+  const { currentMapType } = props;
   useEffect(() => {
     if (mapDiv.current) {
       /**
@@ -40,7 +41,7 @@ function ESRIMap(props) {
        */
 
       mapObjRef.current = new Map({
-        basemap: currentMode,
+        basemap: currentMapType,
         layers: [],
       });
 
@@ -67,12 +68,12 @@ function ESRIMap(props) {
           if (graphicHits?.length > 0) {
             mapViewObjRef.current.popup.open({
               location: event.mapPoint,
-              content: graphicHits[0].graphic.attributes.Popup || '',
+              content: graphicHits[0].graphic.attributes.popup || "",
               title: graphicHits[0].graphic.attributes.city || "Location",
             });
 
             document.getElementById("style-span").innerHTML =
-              graphicHits[0].graphic.attributes.Popup;
+              graphicHits[0].graphic.attributes.popup;
           }
         });
       });
@@ -85,13 +86,13 @@ function ESRIMap(props) {
 
   useEffect(() => {
     if (mapDiv.current && mapObjRef.current) {
-      mapObjRef.current.basemap = Basemap.fromId(props.currentMode);
+      mapObjRef.current.basemap = Basemap.fromId(props.currentMapType);
 
       setTimeout(function () {
         setIsMapLoaded(true);
       }, mapViewObjRef.current.spatialReferenceWarningDelay);
     }
-  }, [props.currentMode]);
+  }, [props.currentMapType]);
 
   const recenterMap = (locations, zoomLevel) => {
     let options = {
@@ -144,33 +145,47 @@ function ESRIMap(props) {
     }
   };
 
-  const addGraphicsMarkerLayer = (markerData) => {
+  const addGraphicsMarkerLayer = (markerData, layerTitle = "mylayer") => {
     let customGraphicsList = [];
 
-    markerData.forEach((location) => {
-      const point = {
-        type: "point", // autocasts as new Point()
-        longitude: location.geoCodes.longitude,
-        latitude: location.geoCodes.latitude,
-      };
+    if (markerData?.length) {
+      markerData.forEach((location) => {
+        const point = {
+          type: "point", // autocasts as new Point()
+          longitude: location.geoCodes.longitude,
+          latitude: location.geoCodes.latitude,
+        };
 
-      // Create a symbol for drawing the point
-      const markerSymbol = {
-        type: "picture-marker", // autocasts as new PictureMarkerSymbol()
-        url: imageSelector(location.picture.src),
-        width: location.picture.width,
-        height: location.picture.height,
-      };
+        // Create a symbol for drawing the point
+        const markerSymbol = {
+          type: "picture-marker", // autocasts as new PictureMarkerSymbol()
+          url: imageSelector(location.picture.src),
+          width: location.picture.width,
+          height: location.picture.height,
+        };
 
-      // Create a graphic and add the geometry and symbol to it
-      const pointGraphic = new Graphic({
-        geometry: point,
-        symbol: markerSymbol,
+        // Create a graphic and add the geometry and symbol to it
+        const pointGraphic = new Graphic({
+          geometry: point,
+          symbol: markerSymbol,
+        });
+        pointGraphic.attributes = location.attributes;
+        customGraphicsList.push(pointGraphic);
       });
-      pointGraphic.attributes = location.attributes;
-      customGraphicsList.push(pointGraphic);
-    });
-    mapViewObjRef.current.graphics.addMany(customGraphicsList);
+
+      let graphicLayer = new GraphicsLayer({
+        graphics: customGraphicsList,
+        title: layerTitle,
+      });
+      mapObjRef.current.layers.push(graphicLayer);
+    }
+  };
+
+  const removeLayerByTitle = (title) => {
+    mapViewObjRef.current.popup.close();
+    mapObjRef.current.remove(
+      mapObjRef.current.allLayers.find((layer) => layer.title === title)
+    );
   };
 
   return (
@@ -179,6 +194,8 @@ function ESRIMap(props) {
         isMapLoaded={isMapLoaded}
         renderGraphicsLayer={addGraphicsMarkerLayer}
         recenterMap={recenterMap}
+        currentMapDataType={props.currentMapDataType}
+        removeLayerByTitle={removeLayerByTitle}
       />
     </div>
   );

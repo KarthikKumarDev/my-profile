@@ -7,9 +7,14 @@ import Resume from "./resume/Resume";
 import MapSelector from "./selector/MapSelector";
 import Menu from "./menu/Menu";
 
+export const MapDataTypes = {
+  Educational: 1,
+  Professional: 2,
+};
+
 export const MapTypes = [
-  { label: "Geo-Hybrid", value: "hybrid" },
   { label: "Open Street Map", value: "osm" },
+  { label: "Geo-Hybrid", value: "hybrid" },
   { label: "Nat Geo", value: "national-geographic" },
   { label: "Streets Vector", value: "streets-vector" },
   { label: "Gray Vector", value: "gray-vector" },
@@ -17,29 +22,32 @@ export const MapTypes = [
 
 function App() {
   const [mapType, setMapType] = useState(MapTypes[0]);
-  const [mapMode, setMapMode] = useState(false);
+  const [mapDataType, setMapDataType] = useState(MapDataTypes.Educational);
   const [isResumeOpen, setResumeOpen] = useState(false);
 
   return (
     <div className="App">
       <Menu />
       <MapSelector
-        currentMode={mapMode}
-        currentType={mapType}
+        currentMapDataType={mapDataType}
+        currentMapType={mapType}
         setMapType={(value) =>
           setMapType(
             MapTypes.find((item) => item.value === value) || MapTypes[0]
           )
         }
-        setMapMode={(value) => setMapMode(value)}
+        setMapDataType={(value) => setMapDataType(value)}
         HandleOpenResume={(event) => setResumeOpen(true)}
       />
-      <ESRIMap currentMode={mapType.value}></ESRIMap>
+      <ESRIMap
+        currentMapType={mapType.value}
+        currentMapDataType={mapDataType}
+      ></ESRIMap>
       <Resume
         isOpen={isResumeOpen}
         handleClose={(event) => setResumeOpen(false)}
       />
-      <span id="style-span" style={{display:"none"}}/>
+      <span id="style-span" style={{ display: "none" }} />
     </div>
   );
 }
