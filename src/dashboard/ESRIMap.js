@@ -8,8 +8,6 @@ import Point from "@arcgis/core/geometry/Point";
 import Polygon from "@arcgis/core/geometry/Polygon";
 import * as webMercatorUtils from "@arcgis/core/geometry/support/webMercatorUtils";
 
-import schoolLogo from "../images/school-logo.png";
-import collegeLogo from "../images/college-logo.png";
 
 import Dashboard from "./Dashboard";
 
@@ -20,17 +18,6 @@ function ESRIMap(props) {
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   let mapObjRef = useRef(null);
-
-  const imageSelector = (imageName) => {
-    switch (imageName) {
-      case "school-logo":
-        return schoolLogo;
-      case "college-logo":
-        return collegeLogo;
-      default:
-        return schoolLogo;
-    }
-  };
 
   let mapViewObjRef = useRef(null);
   const { currentMapType } = props;
@@ -159,7 +146,7 @@ function ESRIMap(props) {
         // Create a symbol for drawing the point
         const markerSymbol = {
           type: "picture-marker", // autocasts as new PictureMarkerSymbol()
-          url: imageSelector(location.picture.src),
+          url: location.picture.src,
           width: location.picture.width,
           height: location.picture.height,
         };

@@ -33,8 +33,8 @@ function Dashboard(props) {
             },
             picture: {
               src: record.Logo,
-              height: "50px",
-              width: "50px",
+              height: record.LogoHeight,
+              width: record.LogoWidth,
             },
             attributes: {
               name: record.Name,
