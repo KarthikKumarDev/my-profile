@@ -1,9 +1,6 @@
 name: Deploy Surge Website   
 on: [push]
-env:
-  BUILD_NUM: ${{ github.run_number }}
-  ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-  run: echo ::set-env name=REACT_APP_VERSION::$(($BUILD_NUM+53))
+
 jobs:
        build:                           
            runs-on: ubuntu-latest 
@@ -17,7 +14,11 @@ jobs:
                
            - name: install dependencies                              
              run: npm install
-           - name: Build App                              
+           - name: Build App
+             env:
+                BUILD_NUM: ${{ github.run_number }}
+                ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+                run: echo ::set-env name=REACT_APP_VERSION::$(($BUILD_NUM+50))
              run: npm run build
              
            - name: Install Surge
