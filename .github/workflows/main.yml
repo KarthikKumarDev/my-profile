@@ -19,7 +19,7 @@ jobs:
            - name: Install Surge
              run: npm install --global surge
            - name: Generate build number
-             run: echo ::set-env name=BUILD_NUM::$(($github.run_id+56))
+             run: echo ::set-env name=BUILD_NUM::$(($github.run_number+56))
            - name: Add the Build number
              run: export REACT_APP_VERSION=$BUILD_NUM 
            - name: Run surge
