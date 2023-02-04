@@ -21,6 +21,7 @@ jobs:
            - name: Generate build number
              env:
               BUILD_NUM: ${{ github.run_number }}
+              ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
              run: echo ::set-env name=GITHUB_RUN_NUMBER_WITH_OFFSET::$(($BUILD_NUM+53))
            - name: Add the Build number
              run: export REACT_APP_VERSION=$GITHUB_RUN_NUMBER_WITH_OFFSET 
