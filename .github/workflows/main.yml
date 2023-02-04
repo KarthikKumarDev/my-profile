@@ -18,12 +18,10 @@ jobs:
              
            - name: Install Surge
              run: npm install --global surge
-           - name: Generate build number
+           - name: Generate and Add build number
              env:
               BUILD_NUM: ${{ github.run_number }}
               ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-             run: echo ::set-env name=GITHUB_RUN_NUMBER_WITH_OFFSET::$(($BUILD_NUM+53))
-           - name: Add the Build number
-             run: export REACT_APP_VERSION=$GITHUB_RUN_NUMBER_WITH_OFFSET 
+             run: echo ::set-env name=REACT_APP_VERSION::$(($BUILD_NUM+53))
            - name: Run surge
              run: surge ./build kkumar-folio.surge.sh --token ${{ secrets.SURGE_TOKEN }}
