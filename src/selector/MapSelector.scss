@@ -4,25 +4,20 @@
     right: 10px;
     top: 10px;
 
-    .radio-selector {
+    .misc-icons {
         background: var(--secondary);
         padding: 10px;
         border-radius: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 300px;
-
-        input {
-            margin-right: 10px;
-            margin-left: 10px;
-        }
+        width: 25px;
+        margin-left: 10px;
+        margin-top: 10px;
     }
 
     .map-type {
         background: var(--secondary);
         padding: 10px;
         margin-top: 10px;
+        min-width: 110px;
     }
 }
 

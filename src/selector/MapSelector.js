@@ -25,48 +25,50 @@ function MapSelector(props) {
 
   return (
     <div className="map-controls">
-      <div className="radio-selector">
-        <div>
-          <input
-            type="radio"
-            name="rg1"
-            checked={props.currentMapDataType === 1}
-            onChange={() => props.setMapDataType(MapDataTypes.Educational)}
-          />
-          {Object.keys(MapDataTypes)[0]}
+      <div className="d-flex">
+        <div className="map-type">
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Map Data</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={props.currentMapDataType}
+              label="Map Locations"
+              onChange={(event) => props.setMapDataType(event.target.value)}
+            >
+              {MapDataTypes.map((type, index) => (
+                <MenuItem key={index} value={type}>
+                  {type}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
-        <div>
-          <input
-            type="radio"
-            name="rg1"
-            checked={props.currentMapDataType === 2}
-            onChange={() => props.setMapDataType(MapDataTypes.Professional)}
-          />
-          {Object.keys(MapDataTypes)[1]}
+        <div className="misc-icons">
+          <PictureAsPdfIcon color="inherit" onClick={props.HandleOpenResume} />
+          <InfoIcon color="inherit" onClick={(event) => setOpenInfo(true)} />
+          <Dialog onClose={(event) => setOpenInfo(false)} open={openInfo}>
+            <DialogTitle>
+              <div className="info-panel">
+                About this App
+                <CloseIcon
+                  aria-label="close"
+                  onClick={(event) => setOpenInfo(false)}
+                />
+              </div>
+            </DialogTitle>
+            <About />
+          </Dialog>
         </div>
-        <PictureAsPdfIcon color="inherit" onClick={props.HandleOpenResume} />
-        <InfoIcon color="inherit" onClick={(event) => setOpenInfo(true)} />
-        <Dialog onClose={(event) => setOpenInfo(false)} open={openInfo}>
-          <DialogTitle>
-            <div className="info-panel">
-              About this App
-              <CloseIcon
-                aria-label="close"
-                onClick={(event) => setOpenInfo(false)}
-              />
-            </div>
-          </DialogTitle>
-          <About />
-        </Dialog>
       </div>
       <div className="map-type">
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Map Type</InputLabel>
+          <InputLabel id="demo-simple-select-label">Map View Type</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={props.currentMapType.value}
-            label="Map Type"
+            label="Map View Type"
             onChange={handleChange}
           >
             {MapTypes.map((type, index) => (

@@ -7,10 +7,7 @@ import Resume from "./resume/Resume";
 import MapSelector from "./selector/MapSelector";
 import Menu from "./menu/Menu";
 
-export const MapDataTypes = {
-  Educational: 1,
-  Professional: 2,
-};
+export const MapDataTypes = ["All", "Educational", "Professional"];
 
 export const MapTypes = [
   { label: "Open Street Map", value: "osm" },
@@ -22,7 +19,7 @@ export const MapTypes = [
 
 function App() {
   const [mapType, setMapType] = useState(MapTypes[0]);
-  const [mapDataType, setMapDataType] = useState(MapDataTypes.Educational);
+  const [mapDataType, setMapDataType] = useState(MapDataTypes[0]);
   const [isResumeOpen, setResumeOpen] = useState(false);
 
   return (

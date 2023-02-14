@@ -25,7 +25,7 @@ function Dashboard(props) {
     if (isMapLoaded) {
       let markerData = [];
       geoData.forEach((record) => {
-        if (currentMapDataType?.toString() === record.DataType) {
+        if (currentMapDataType === 'All' || currentMapDataType === record.DataType) {
           markerData.push({
             geoCodes: {
               latitude: record.Latitude,
