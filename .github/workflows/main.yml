@@ -14,11 +14,15 @@ jobs:
                
            - name: install dependencies                              
              run: npm install
-           - name: Build App
+           - name: Update Build number
              env:
-                BUILD_NUM: ${{ github.run_number }}
-                ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-                run: echo ::set-env name=REACT_APP_VERSION::$(($BUILD_NUM+50))
+               RUN_NUMBER: ${{ github.run_number }}
+             run: echo "REACT_APP_VERSION = $(($RUN_NUMBER + 50))" >> .env
+             
+           - name: .env file
+             run: cat .env
+             
+           - name: Build App
              run: npm run build
              
            - name: Install Surge
