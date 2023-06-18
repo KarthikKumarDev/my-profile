@@ -21,7 +21,11 @@
 
     .menu-wrapper {
         display: flex;
-
+        
+        .level-1-menu {
+            flex-direction: column;
+            display: flex;
+        }
         .menu-item {
             height: 60px;
             width: 60px;
@@ -29,7 +33,7 @@
             border-radius: 5px;
             border: var(--primary) 4px solid;
             height: 55px;
-            margin-top: 20px;
+            margin-top: 15px;
 
             img {
                 padding: 5px 0px;

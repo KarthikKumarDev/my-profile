@@ -41,7 +41,7 @@ function MenuItem(props) {
 
   return (
     <div className="menu-wrapper">
-      <div className="d-flex">
+      <div className="level-1-menu">
         {topicsData.map((item, index) => {
           const indexToUpdate = currentMenuItem === item.Id ? null : item.Id;
           return (
