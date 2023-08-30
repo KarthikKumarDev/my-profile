@@ -6,7 +6,8 @@ import { arrayToObject } from "../helpers/common.helpers";
 function Dashboard(props) {
   const {
     isMapLoaded,
-    renderGraphicsLayer,
+    // renderGraphicsLayer,
+    renderClusterLayer,
     recenterMap,
     currentMapDataType,
     removeLayerByTitle,
@@ -25,16 +26,14 @@ function Dashboard(props) {
     if (isMapLoaded) {
       let markerData = [];
       geoData.forEach((record) => {
-        if (currentMapDataType === 'All' || currentMapDataType === record.DataType) {
+        if (
+          currentMapDataType === "All" ||
+          currentMapDataType === record.DataType
+        ) {
           markerData.push({
             geoCodes: {
               latitude: record.Latitude,
               longitude: record.Longitude,
-            },
-            picture: {
-              src: record.Logo,
-              height: record.LogoHeight,
-              width: record.LogoWidth,
             },
             attributes: {
               name: record.Name,
@@ -42,6 +41,11 @@ function Dashboard(props) {
               state: record.State,
               popup: record.PopupStem,
               dataType: record.Type,
+              picture: {
+                src: record.Logo,
+                height: record.LogoHeight,
+                width: record.LogoWidth,
+              },
             },
           });
         }
@@ -51,7 +55,11 @@ function Dashboard(props) {
 
       const layerTitle = "dashboard-graphics";
       removeLayerByTitle(layerTitle);
-      renderGraphicsLayer(markerData, layerTitle);
+
+      if (geoCodes.length) {
+        // renderGraphicsLayer(markerData, layerTitle);
+        renderClusterLayer(markerData, layerTitle);
+      }
       recenterMap(geoCodes);
     }
   }, [isMapLoaded, currentMapDataType]); // eslint-disable-line react-hooks/exhaustive-deps

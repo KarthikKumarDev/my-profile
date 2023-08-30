@@ -3,11 +3,19 @@ import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import Graphic from "@arcgis/core/Graphic";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
+import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 import Basemap from "@arcgis/core/Basemap";
 import Point from "@arcgis/core/geometry/Point";
 import Polygon from "@arcgis/core/geometry/Polygon";
 import * as webMercatorUtils from "@arcgis/core/geometry/support/webMercatorUtils";
 
+import {
+  generateGeoJSON,
+  generateJSONBlobURL,
+  generateUniqueValueInfos,
+  getClusterIconSVG,
+  generateSVGBlobURL
+} from "../helpers/map.helpers";
 
 import Dashboard from "./Dashboard";
 
@@ -146,9 +154,9 @@ function ESRIMap(props) {
         // Create a symbol for drawing the point
         const markerSymbol = {
           type: "picture-marker", // autocasts as new PictureMarkerSymbol()
-          url: location.picture.src,
-          width: location.picture.width,
-          height: location.picture.height,
+          url: location.attributes.picture.src,
+          width: location.attributes.picture.width,
+          height: location.attributes.picture.height,
         };
 
         // Create a graphic and add the geometry and symbol to it
@@ -168,8 +176,74 @@ function ESRIMap(props) {
     }
   };
 
+  const addClusterMarkerLayer = (markerData, layerTitle = "myClusterlayer") => {
+    if (markerData?.length) {
+      const clusterConfig = {
+        type: "cluster",
+        clusterRadius: "100px",
+        // {cluster_count} is an aggregate field containing
+        // the number of features comprised by the cluster
+        popupTemplate: {
+          title: "Cluster summary",
+          content: "This cluster represents {cluster_count} locations.",
+          fieldInfos: [
+            {
+              fieldName: "cluster_count",
+              format: {
+                places: 0,
+                digitSeparator: true,
+              },
+            },
+          ],
+        },
+        clusterMinSize: "50px",
+        clusterMaxSize: "50px",
+        labelingInfo: [
+          {
+            deconflictionStrategy: "none",
+            labelExpressionInfo: {
+              expression: "Text($feature.cluster_count, '#,###')",
+            },
+            symbol: {
+              type: "text",
+              color: "#FFFFFF",
+              yoffset: 3,
+              font: {
+                weight: "bold",
+                family: "Noto Sans",
+                size: "18px",
+              },
+            },
+            labelPlacement: "center-center",
+          },
+        ],
+      };
+
+      const clusterLayer = new GeoJSONLayer({
+        title: layerTitle,
+        url: generateJSONBlobURL(generateGeoJSON(markerData)),
+        copyright: "Karthik Kumar",
+
+        featureReduction: clusterConfig,
+
+        renderer: {
+          type: "unique-value", // autocasts as new UniqueValueRenderer()
+          field: "name",
+          defaultSymbol: {
+            type: "picture-marker",
+            url: generateSVGBlobURL(getClusterIconSVG()),
+            width: 50,
+            height: 50
+          },
+          uniqueValueInfos: generateUniqueValueInfos(markerData),
+        },
+      });
+      mapObjRef.current.layers.push(clusterLayer);
+    }
+  };
+
   const removeLayerByTitle = (title) => {
-    mapViewObjRef.current.popup.close();
+    mapViewObjRef?.current?.popup?.close();
     mapObjRef.current.remove(
       mapObjRef.current.allLayers.find((layer) => layer.title === title)
     );
@@ -180,6 +254,7 @@ function ESRIMap(props) {
       <Dashboard
         isMapLoaded={isMapLoaded}
         renderGraphicsLayer={addGraphicsMarkerLayer}
+        renderClusterLayer={addClusterMarkerLayer}
         recenterMap={recenterMap}
         currentMapDataType={props.currentMapDataType}
         removeLayerByTitle={removeLayerByTitle}
