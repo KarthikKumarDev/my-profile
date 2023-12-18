@@ -37,6 +37,7 @@ export const generateUniqueValueInfos = (data) => {
         width: record.attributes.picture.width,
         height: record.attributes.picture.height,
       },
+      popupTemplate: record.attributes.popup,
     });
   });
   return uniqueValueInfos;
@@ -48,7 +49,6 @@ export const generateSVGBlobURL = (svgString) => {
   // Create a URL for the Blob
   return URL.createObjectURL(blob);
 };
-
 
 export const getClusterIconSVG = () => {
   return `<svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">

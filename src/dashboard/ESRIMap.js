@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
+import Point from "@arcgis/core/geometry/Point";
+import Polygon from "@arcgis/core/geometry/Polygon";
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import Graphic from "@arcgis/core/Graphic";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 import Basemap from "@arcgis/core/Basemap";
-import Point from "@arcgis/core/geometry/Point";
-import Polygon from "@arcgis/core/geometry/Polygon";
 import * as webMercatorUtils from "@arcgis/core/geometry/support/webMercatorUtils";
 
 import {
@@ -14,7 +14,7 @@ import {
   generateJSONBlobURL,
   generateUniqueValueInfos,
   getClusterIconSVG,
-  generateSVGBlobURL
+  generateSVGBlobURL,
 } from "../helpers/map.helpers";
 
 import Dashboard from "./Dashboard";
@@ -60,7 +60,10 @@ function ESRIMap(props) {
               hitResult.type === "graphic" &&
               hitResult.graphic.layer.title !== "Hybrid Reference Layer"
           );
-          if (graphicHits?.length > 0) {
+          if (
+            graphicHits?.length &&
+            !graphicHits[0].graphic.attributes.cluster_count
+          ) {
             mapViewObjRef.current.popup.open({
               location: event.mapPoint,
               content: graphicHits[0].graphic.attributes.popup || "",
@@ -233,9 +236,35 @@ function ESRIMap(props) {
             type: "picture-marker",
             url: generateSVGBlobURL(getClusterIconSVG()),
             width: 50,
-            height: 50
+            height: 50,
           },
           uniqueValueInfos: generateUniqueValueInfos(markerData),
+          visualVariables: [
+            {
+              type: "size",
+              field: "city",
+              minDataValue: 0,
+              maxDataValue: 60,
+              minSize: 8,
+              maxSize: 40,
+            },
+            {
+              type: "size",
+              field: "state",
+              minDataValue: 0,
+              maxDataValue: 60,
+              minSize: 8,
+              maxSize: 40,
+            },
+            {
+              type: "size",
+              field: "popup",
+              minDataValue: 0,
+              maxDataValue: 60,
+              minSize: 8,
+              maxSize: 40,
+            },
+          ],
         },
       });
       mapObjRef.current.layers.push(clusterLayer);
