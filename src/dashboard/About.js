@@ -19,11 +19,11 @@ const About = () => {
       <div>
         <b>CI/CD Pipeline:</b>
         &nbsp;<a
-          href="https://app.travis-ci.com/github/KarthikKumarDev/my-profile"
+          href="https://github.com/KarthikKumarDev/my-profile/actions"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Travis Build
+          GitHub Actions
         </a>
       </div>
     </div>
